@@ -99,6 +99,7 @@ $(document).ready(function () {
         // clear the description from the textarea
         $(this).siblings(".description").val("");
     });
+    // initialize the page
     function init() {
         displayTimeBlocks();
         loadEvents();
