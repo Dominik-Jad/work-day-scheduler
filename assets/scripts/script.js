@@ -89,7 +89,16 @@ $(document).ready(function () {
             descriptionEl.val(description);
         }
     }
-
+    // delete event from local storage
+    $(".container").on("click", ".deleteBtn", function () {
+        // get the hour and description of the time-block
+        var hour = $(this).attr("data-hour");
+        var description = $(this).siblings(".description").val();
+        // remove the event from local storage
+        localStorage.removeItem(hour, description);
+        // clear the description from the textarea
+        $(this).siblings(".description").val("");
+    });
     function init() {
         displayTimeBlocks();
         loadEvents();
