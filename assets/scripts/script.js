@@ -66,9 +66,19 @@ $(document).ready(function () {
             }
         });
     }
-    // user can enter an event in a time-block 
-   
-    // saved events persist when page is refreshed
+    // Event listener for save button to save events to local storage delegated to the container
+    $(".container").on("click", ".saveBtn", function () {
+        // get the hour and description of the time-block
+        var hour = $(this).attr("data-hour");
+        var description = $(this).siblings(".description").val();
+        // if the description is empty, alert the user to enter an event
+        if (description === "") {
+            return alert("Please enter an event.");
+        }
+        // save the event to local storage
+        localStorage.setItem(hour, description);
+    });
+
     function init() {
         displayTimeBlocks();
         colorCode();
