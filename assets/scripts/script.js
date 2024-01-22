@@ -33,7 +33,7 @@ $(document).ready(function () {
             deleteBtnEl.attr("data-hour", workingHours[i]);
             // append elements to the time-block and then appned that to the container
             timeBlockEl.append(hourEl.text(workingHours[i]));
-            timeBlockEl.append(saveBtnEl, deleteBtnEl, descriptionEl);
+            timeBlockEl.append(descriptionEl, saveBtnEl, deleteBtnEl);
             $(".container").append(timeBlockEl);
         }
     }
@@ -78,9 +78,21 @@ $(document).ready(function () {
         // save the event to local storage
         localStorage.setItem(hour, description);
     });
+    // load from local storage 
+    function loadEvents() {
+        // loop through each hour of the work day
+        for (var i = 0; i < workingHours.length; i++) {
+            var hour = workingHours[i];
+            var description = localStorage.getItem(hour);
+            // add the description to the textarea with the corresponding hour
+            var descriptionEl = $(`textarea[data-hour='${hour}']`);
+            descriptionEl.val(description);
+        }
+    }
 
     function init() {
         displayTimeBlocks();
+        loadEvents();
         colorCode();
     }
     init();
